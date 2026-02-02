@@ -1,0 +1,57 @@
+<div class="p-6 space-y-8">
+  <h1 class="text-2xl font-bold text-gray-800">HR Dashboard - Under PIP Overview</h1>
+
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="gradient-card">
+      <p class="card-title">Total Employees</p>
+      <p class="card-value">{{ totalEmployees }}</p>
+    </div>
+    <div class="gradient-card">
+      <p class="card-title">Under PIP</p>
+      <p class="card-value">{{ pipCount }}</p>
+    </div>
+    <div class="gradient-card">
+      <p class="card-title">Inactive Employees</p>
+      <p class="card-value">{{ inactiveCount }}</p>
+    </div>
+  </div>
+
+  <!-- Chart Placeholder -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-lg font-semibold mb-4 text-rose-600">Performance Distribution (KRA/KPI)</h2>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+
+  </div>
+
+  <!-- Table Placeholder -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-lg font-semibold mb-4 text-rose-600">Recent Employee PIP Logs</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm text-left text-gray-700">
+        <thead>
+          <tr class="bg-rose-100 text-rose-700">
+            <th class="py-2 px-4">Employee</th>
+            <th class="py-2 px-4">Manager</th>
+            <th class="py-2 px-4">KRA</th>
+            <th class="py-2 px-4">Status</th>
+            <th class="py-2 px-4">Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b hover:bg-rose-50">
+            <td class="py-2 px-4">Anjali Verma</td>
+            <td class="py-2 px-4">Ramesh T.</td>
+            <td class="py-2 px-4">Client Retention</td>
+            <td class="py-2 px-4">
+              <span class="px-2 py-1 bg-yellow-200 text-yellow-800 rounded">Under PIP</span>
+            </td>
+            <td class="py-2 px-4">June 19, 2025</td>
+          </tr>
+          <!-- Add more rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

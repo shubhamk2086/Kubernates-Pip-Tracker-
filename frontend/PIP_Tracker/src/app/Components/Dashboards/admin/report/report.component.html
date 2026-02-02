@@ -1,0 +1,22 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-10">
+  <h1 class="text-4xl font-bold text-indigo-700 mb-10 text-center">👥 Employee Summary Report</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Employees</h2>
+      <p class="text-3xl font-bold text-indigo-600">{{ report.totalEmployees }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Total HRs</h2>
+      <p class="text-3xl font-bold text-green-600">{{ report.totalHRs }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Managers</h2>
+      <p class="text-3xl font-bold text-yellow-600">{{ report.totalManagers }}</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Admins</h2>
+      <p class="text-3xl font-bold text-red-600">{{ report.totalAdmins }}</p>
+    </div>
+  </div>
+</div>

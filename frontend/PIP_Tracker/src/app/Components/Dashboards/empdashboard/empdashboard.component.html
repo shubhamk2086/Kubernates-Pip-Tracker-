@@ -1,0 +1,57 @@
+<div class="flex min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <!-- Sidebar -->
+  <aside class="w-64 min-h-screen bg-gradient-to-br from-purple-700 via-indigo-700 to-pink-600 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950 text-white flex flex-col justify-between p-6" aria-label="Sidebar">
+    <!-- Top Section -->
+    <div>
+      <div class="mb-8" aria-label="Application Brand">
+        <img src="assets/logos/pip.png" alt="PIP Logo" class="h-10 mb-3" />
+        <h1 class="text-xl font-semibold tracking-wide" style="font-family: 'Orbitron', sans-serif;">Pro Tracker</h1>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="space-y-4">
+        <a (click)="currentView = 'feedback'" class="block px-4 py-2 rounded hover:bg-white hover:text-purple-700 transition">Feedback</a>
+        <a (click)="currentView = 'SkillGap'" class="block px-4 py-2 rounded hover:bg-white hover:text-purple-700 transition">SkillGap</a>
+
+        <a (click)="currentView = 'performance-review'" class="block px-4 py-2 rounded hover:bg-white hover:text-purple-700 transition">Performance Review</a>
+        <!-- <a (click)="currentView = 'report'" class="block px-4 py-2 rounded hover:bg-white hover:text-purple-700 transition">Report</a> -->
+        <a (click)="currentView = 'settings'" class="block px-4 py-2 text-sm text-white rounded hover:bg-white hover:text-purple-700 transition">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="space-y-2 border-t border-white/30 pt-4">
+      <button (click)="logout()" class="w-full text-left px-4 py-2 text-sm text-red-200 hover:text-red-600 hover:bg-white rounded transition">
+        🔓 Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950 text-white px-6 py-4 shadow flex justify-between items-center">
+      <h2 class="text-xl font-bold">Welcome to EmpowerBoard</h2>
+    </header>
+
+    <!-- Current View Label -->
+    <div class="bg-indigo-50 dark:bg-gray-800 text-indigo-800 dark:text-indigo-200 text-sm font-medium px-4 py-2 shadow-sm">
+      Current View: {{ currentView | titlecase }}
+    </div>
+
+    <!-- ✅ Logout Toast -->
+    <div *ngIf="showLogoutToast"
+         class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50 transition-all duration-500 transform animate-fade-in"
+         role="alert">
+      ✅ Logout successful
+    </div>
+
+    <!-- Routed Views -->
+    <main class="flex-1 p-6 overflow-y-auto">
+      <app-feedback-notes *ngIf="currentView === 'feedback'"></app-feedback-notes>
+      <app-skill-analytics *ngIf="currentView === 'SkillGap'"></app-skill-analytics>
+      <app-performance-review *ngIf="currentView === 'performance-review'"></app-performance-review>
+      <app-settings *ngIf="currentView === 'settings'"></app-settings>
+    </main>
+  </div>
+</div>

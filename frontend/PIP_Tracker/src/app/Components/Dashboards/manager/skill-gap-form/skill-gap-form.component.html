@@ -1,0 +1,132 @@
+<div class="max-w-3xl mx-auto mt-8">
+  <div class="bg-white shadow-lg rounded-2xl p-6">
+    <!-- Heading -->
+    <h2 class="text-2xl font-bold text-center text-purple-700 mb-4">
+      Add / Update Skill Gap
+    </h2>
+
+    <!-- Error / Success Messages -->
+    <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center">
+      {{ successMessage }}
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      
+      <!-- Employee Select -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Select Employee</label>
+        <select
+          [(ngModel)]="selectedEmployeeId"
+          name="employeeId"
+          (change)="loadSkillGaps(selectedEmployeeId)"   
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+          required
+        >
+          <option value="">-- Choose Employee --</option>
+          <option *ngFor="let emp of employees" [value]="emp.employeeId">
+            {{ emp.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Required Skills -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Required Skills</label>
+        <input
+          type="text"
+          [(ngModel)]="requiredSkills"
+          name="requiredSkills"
+          placeholder="Enter required skills"
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+          required
+        />
+      </div>
+
+      <!-- Current Skills -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Current Skills</label>
+        <input
+          type="text"
+          [(ngModel)]="currentSkills"
+          name="currentSkills"
+          placeholder="Enter current skills"
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+          required
+        />
+      </div>
+
+      <!-- Gap Level -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Gap Level (1-5)</label>
+        <input
+          type="number"
+          [(ngModel)]="gapLevel"
+          name="gapLevel"
+          min="1"
+          max="5"
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+          required
+        />
+      </div>
+
+      <!-- Skill -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Skill</label>
+        <input
+          type="text"
+          [(ngModel)]="skill"
+          name="skill"
+          placeholder="Enter skill"
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+        />
+      </div>
+
+      <!-- Suggested Training -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Suggested Training</label>
+        <input
+          type="text"
+          [(ngModel)]="suggestedTraining"
+          name="suggestedTraining"
+          placeholder="Enter suggested training"
+          class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition"
+      >
+        Submit Skill Gap
+      </button>
+    </form>
+  </div>
+
+  <!-- Existing Skill Gaps -->
+  <div class="bg-white shadow-md rounded-2xl p-6 mt-6" *ngIf="selectedEmployeeId">
+    <h3 class="text-xl font-semibold text-gray-800 mb-3">
+      Employee Skill Gaps
+    </h3>
+    
+    <div *ngIf="isLoadingGaps" class="text-center text-gray-500">Loading...</div>
+    
+    <ul *ngIf="!isLoadingGaps && skillGaps.length > 0" class="space-y-2">
+      <li *ngFor="let gap of skillGaps" class="p-3 border rounded-lg bg-gray-50">
+        <p><strong>Required:</strong> {{ gap.requiredSkills }}</p>
+        <p><strong>Current:</strong> {{ gap.currentSkills }}</p>
+        <p><strong>Gap Level:</strong> {{ gap.gapLevel }}</p>
+        <p><strong>Skill:</strong> {{ gap.skill }}</p>
+        <p><strong>Training:</strong> {{ gap.suggestedTraining }}</p>
+      </li>
+    </ul>
+    
+    <p *ngIf="!isLoadingGaps && skillGaps.length === 0" class="text-gray-500 text-center">
+      No skill gaps found for this employee.
+    </p>
+  </div>
+</div>

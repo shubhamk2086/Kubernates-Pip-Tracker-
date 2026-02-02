@@ -1,0 +1,87 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+<h1 class="text-2xl font-bold text-gray-800 mb-4">Admin PIP Tracker</h1>
+ 
+  <!-- Loading Indicator -->
+<div *ngIf="loading" class="text-blue-600 font-medium">Loading data...</div>
+ 
+  <!-- Error Message -->
+<div *ngIf="errorMessage" class="text-red-600 font-medium">{{ errorMessage }}</div>
+ 
+  <!-- PIP Table -->
+<table *ngIf="pipList.length > 0" class="w-full border border-gray-300 rounded shadow-sm mt-4">
+<thead class="bg-gray-200 text-gray-700">
+<tr>
+<th class="px-4 py-2 text-left">#</th>
+<th class="px-4 py-2 text-left">Employee</th>
+<th class="px-4 py-2 text-left">Reviewer</th>
+<th class="px-4 py-2 text-left">Department</th>
+<th class="px-4 py-2 text-left">Designation</th>
+<th class="px-4 py-2 text-left">Start Date</th>
+<th class="px-4 py-2 text-left">End Date</th>
+<th class="px-4 py-2 text-left">Status</th>
+<th class="px-4 py-2 text-left">Goals</th>
+<th class="px-4 py-2 text-left">Comments</th>
+<th class="px-4 py-2 text-left">Progress</th>
+<th class="px-4 py-2 text-left">Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let pip of pipList; let i = index" class="border-t bg-white hover:bg-gray-50">
+<td class="px-4 py-2">{{ i + 1 }}</td>
+ 
+        <!-- Employee Info -->
+<td class="px-4 py-2">
+<div class="font-semibold">{{ pip.employee?.name || 'N/A' }}</div>
+<div class="text-sm text-gray-600">{{ pip.employee?.email || 'N/A' }}</div>
+</td>
+ 
+        <!-- Reviewer Info -->
+<td class="px-4 py-2">
+<div class="font-semibold">{{ pip.reviewer?.name || 'N/A' }}</div>
+<div class="text-sm text-gray-600">{{ pip.reviewer?.email || 'N/A' }}</div>
+</td>
+ 
+        <!-- Department and Designation -->
+<td class="px-4 py-2">{{ pip.department || '—' }}</td>
+<td class="px-4 py-2">{{ pip.designation || '—' }}</td>
+ 
+        <!-- Dates -->
+<td class="px-4 py-2">{{ pip.startDate | date:'mediumDate' }}</td>
+<td class="px-4 py-2">{{ pip.endDate | date:'mediumDate' }}</td>
+ 
+        <!-- Status -->
+<td class="px-4 py-2">
+<span [ngClass]="{
+
+            'text-green-600 font-semibold': pip.status === 'Completed',
+
+            'text-yellow-600 font-semibold': pip.status === 'In Progress',
+
+            'text-red-600 font-semibold': pip.status === 'Pending',
+
+            'text-blue-600 font-semibold': pip.status === 'ACTIVE'
+
+          }">{{ pip.status }}</span>
+</td>
+ 
+        <!-- Goals and Comments -->
+<td class="px-4 py-2">{{ pip.goals || '—' }}</td>
+<td class="px-4 py-2">{{ pip.comments || '—' }}</td>
+ 
+        <!-- Progress -->
+<td class="px-4 py-2">{{ pip.progress || '—' }}</td>
+ 
+        <!-- Outcome -->
+<td class="px-4 py-2">{{ pip.outcome || '—' }}</td>
+</tr>
+</tbody>
+</table>
+ 
+  <!-- No Data Message -->
+<div *ngIf="pipList.length === 0 && !loading" class="text-gray-500 mt-4">
+
+    No PIP entries found.
+</div>
+</div>
+
+ 

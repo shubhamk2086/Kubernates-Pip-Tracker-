@@ -1,0 +1,66 @@
+<div class="p-6 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-bold mb-6 text-center">👥 All Employees List</h2>
+
+  <!-- HR Table -->
+  <div class="mb-10">
+    <h3 class="text-xl font-semibold mb-2 text-purple-600">HR</h3>
+    <table class="min-w-full bg-white rounded shadow">
+      <thead>
+        <tr class="bg-purple-100 text-left">
+          <th class="py-2 px-4">Name</th>
+          <th class="py-2 px-4">Email</th>
+          <th class="py-2 px-4">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of hrEmployees" class="border-b">
+          <td class="py-2 px-4">{{ emp.name }}</td>
+          <td class="py-2 px-4">{{ emp.email }}</td>
+          <td class="py-2 px-4">{{ emp.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Manager Table -->
+  <div class="mb-10">
+    <h3 class="text-xl font-semibold mb-2 text-blue-600">Managers</h3>
+    <table class="min-w-full bg-white rounded shadow">
+      <thead>
+        <tr class="bg-blue-100 text-left">
+          <th class="py-2 px-4">Name</th>
+          <th class="py-2 px-4">Email</th>
+          <th class="py-2 px-4">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of managerEmployees" class="border-b">
+          <td class="py-2 px-4">{{ emp.name }}</td>
+          <td class="py-2 px-4">{{ emp.email }}</td>
+          <td class="py-2 px-4">{{ emp.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Normal Employees Table -->
+  <div class="mb-10">
+    <h3 class="text-xl font-semibold mb-2 text-green-600">Employees</h3>
+    <table class="min-w-full bg-white rounded shadow">
+      <thead>
+        <tr class="bg-green-100 text-left">
+          <th class="py-2 px-4">Name</th>
+          <th class="py-2 px-4">Email</th>
+          <th class="py-2 px-4">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of normalEmployees" class="border-b">
+          <td class="py-2 px-4">{{ emp.name }}</td>
+          <td class="py-2 px-4">{{ emp.email }}</td>
+          <td class="py-2 px-4">{{ emp.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
