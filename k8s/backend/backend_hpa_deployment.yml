@@ -24,10 +24,16 @@ spec:
           value: jdbc:mysql://mysql:3306/pipdb
         - name: SPRING_DATASOURCE_USERNAME
           value: pipuser
-        - name: SPRING_DATOURCE_PASSWORD
-          value: pip123
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: pip123   # fixed typo here
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
 ---
-# =========================
 # Backend Service
 # =========================
 apiVersion: v1
@@ -41,3 +47,4 @@ spec:
     - port: 8080
       targetPort: 8080
   type: ClusterIP
+

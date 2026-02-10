@@ -1,5 +1,4 @@
-#Frontend Deployment
-# =========================
+# Frontend Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,10 +18,15 @@ spec:
         image: shubhamk142/frontend-pip:latest
         ports:
         - containerPort: 80
+        resources:
+          requests: #HPA
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
 ---
-# =========================
 # Frontend Service
-# =========================
 apiVersion: v1
 kind: Service
 metadata:
@@ -34,3 +38,4 @@ spec:
     - port: 80
       targetPort: 80
   type: NodePort
+
