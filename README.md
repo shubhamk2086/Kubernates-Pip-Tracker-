@@ -157,7 +157,7 @@ frontend/
 ├── package.json       <-- IMPORTANT (build configuration)
 └── src/               <-- IMPORTANT (source code)
 
-**Build output (after `npm run build`):**
+# **Build output (after `npm run build`):**
 build/   (React)
 dist/    (Vue/Angular)
 
@@ -230,4 +230,77 @@ here store apliction after build
 -> COPY. /default.conf  /etc/nginx/conf.d/ default.conf
 
 COPY. /default.conf->copy from config file             /etc/nginx/conf.d/ default.conf->  puh inside nginx container
+
+## **HPA Documentes**
+------------------------------------------
+Kubernetes HPA Practical – 
+-------------------------
+1. Issue Observed
+
+HPA showed <unknown>/60%, meaning it could not read CPU metrics.
+
+Without metrics, HPA cannot scale pods.
+
+2. Root Cause
+
+Metrics Server was not installed in the cluster.
+
+HPA needs Metrics Server to fetch CPU/Memory usage.
+
+3. Fix Applied
+
+Installed Metrics Server:
+
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+Verified Metrics Server pod in kube-system namespace:
+
+metrics-server-xxxx Running
+
+4. Verification
+
+Checked metrics:
+
+kubectl top pods
+
+
+HPA status became valid:
+
+0%/60%
+
+5. Load Test to Trigger Scaling
+
+Started load generator pod:
+
+# kubectl run -i --tty load-generator --rm --image=busybox -- /bin/sh
+
+
+Generated load:
+
+# while true; do wget -q -O- http://backend:8080; done
+
+6. Result
+
+HPA detected high CPU usage and scaled backend pods from 1 to 5 replicas.
+
+Verified with:
+
+kubectl get pods
+
+
+After stopping load (Ctrl+C), CPU dropped and HPA will scale down automatically after stabilization period (~5 minutes).
+
+7. Benefits of Using HPA (Based on Practical)
+
+Automatic scaling of pods based on CPU load.
+
+Efficient resource utilization (scales down when load decreases).
+
+Improved availability and fault tolerance.
+
+Cost efficient by using resources only when needed.
+
+Handles sudden traffic spikes without manual intervention.
+ 
 
