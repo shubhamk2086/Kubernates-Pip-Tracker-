@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backend-migration-job
+spec:
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: migration-container
+        image: busybox
+        command: ["sh", "-c", "echo Running migration... && sleep 10 && echo Migration completed"]
+
